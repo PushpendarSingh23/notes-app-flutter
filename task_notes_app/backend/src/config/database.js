@@ -13,6 +13,9 @@ const pool = mysql.createPool({
   connectionLimit: parseInt(process.env.DB_CONNECTION_LIMIT || '10', 10),
   queueLimit: 0,
   timezone: '+00:00',
+  ssl: {
+    rejectUnauthorized: false
+  },
   typeCast: function (field, next) {
     if (field.type === 'TINY' && field.length === 1) {
       return field.string() === '1';
